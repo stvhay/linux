@@ -71,6 +71,9 @@
 
 &spi0 {
 	flash@0 {
+		spi-max-frequency = <20000000>;
+		m25p,fast-read;
+
 		partitions {
 			compatible = "fixed-partitions";
 			#address-cells = <1>;
@@ -108,6 +111,7 @@
 
 &usb3 {
 	usb-phy = <&usb3_phy>;
+	status = "okay";
 };
 
 &mdio {
