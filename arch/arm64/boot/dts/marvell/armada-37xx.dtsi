@@ -46,6 +46,25 @@
 			reg = <0>;
 			clocks = <&nb_periph_clk 16>;
 			enable-method = "psci";
+                        /* https://datasheet.datasheetarchive.com/originals/crawler/marvell.com/18bd41681c6d1d9932> */
+                        /* https://developer.arm.com/documentation/ddi0500/e/level-1-memory-system/about-the-l1-me> */
+                        d-cache-size = <0x8000>;   // 32KB 4-way set-associative data cache
+                        d-cache-line-size = <64>;  // Fixed line length of 64 bytes
+                        d-cache-sets = <128>;      // 32KiB(size)/64(line-size)=512ways/4-way set
+                        i-cache-size = <0x8000>;   // 32kB 2-way set-associative data cache
+                        i-cache-line-size = <64>;  // Fixed line length of 64 bytes
+                        i-cache-sets = <256>;      // 32KiB(size)/64(line-size)=512ways/2-way set
+                        next-level-cache = <&l2>;
+		};
+
+		l2: l2-cache0 {
+                        /* https://datasheet.datasheetarchive.com/originals/crawler/marvell.com/18bd41681c6d1d9932> */
+                        /* https://developer.arm.com/documentation/ddi0500/e/level-1-memory-system/about-the-l1-me> */
+			compatible = "cache";
+			cache-size = <0x40000>; // 256kB
+			cache-line-size = <64>; // Fixed line length of 64 bytes
+			cache-sets = <256>;     // 256kB(size)/64(line-size)=4000ways/16-way set
+			cache-level = <2>;
 		};
 	};
 
